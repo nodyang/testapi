@@ -4,7 +4,7 @@ namespace TestCk
 {
     public class StatusReq:BaseReq
     {
-        public StatusReq(string appId, string appSecret) : base(appId, appSecret)
+        public StatusReq(string appId, string appSecret,string url) : base(appId, appSecret,url)
         {
             
         }

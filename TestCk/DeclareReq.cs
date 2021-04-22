@@ -7,7 +7,7 @@ namespace TestCk
 
         public string no { get; set; }
         public List<BodyEntity> Data { get; set; }
-        public DeclareReq(string appId, string appSecret) : base(appId, appSecret)
+        public DeclareReq(string appId, string appSecret,string url) : base(appId, appSecret,url)
         {
             
         }

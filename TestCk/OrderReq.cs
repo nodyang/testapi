@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using NewLife.Serialization;
 namespace TestCk
 {
     public class OutReq:BaseReq
@@ -7,7 +8,7 @@ namespace TestCk
         public List<GoodsEntity> GoodsEntities { get; set; }
         public OrderEntity Order { get; set; }
         public ReceiverEntity Receiver { get; set; }
-        public OutReq(string appId, string appSecret) : base(appId, appSecret)
+        public OutReq(string appId, string appSecret,string url) : base(appId, appSecret,url)
         {
             
         }
@@ -16,6 +17,7 @@ namespace TestCk
             var nameValueCollection= base.ToNameValueCollection();
             if (GoodsEntities != null)
             {
+                
                 for (var i = 0; i < GoodsEntities.Count; i++)
                 {
                     var entity = GoodsEntities[i];
@@ -28,7 +30,7 @@ namespace TestCk
                             string rvalue = keyValuePair.Value?.ToString();
                             if (rvalue != null)
                             {
-                                nameValueCollection.Add($"body[{i}][{cname}]",rvalue);
+                                nameValueCollection.Add($"goods[{i}][{cname}]",rvalue);
                             }
                         }
                     }
@@ -40,7 +42,7 @@ namespace TestCk
             {
                 if (keyValuePair.Value != null)
                 {
-                    nameValueCollection.Add($"order.{keyValuePair.Key}",keyValuePair.Value?.ToString());
+                    nameValueCollection.Add($"order[{keyValuePair.Key}]",keyValuePair.Value?.ToString());
                 }
                
             }
@@ -49,10 +51,11 @@ namespace TestCk
             {
                 if (keyValuePair.Value != null)
                 {
-                    nameValueCollection.Add($"receiver.{keyValuePair.Key}",keyValuePair.Value?.ToString());
+                    nameValueCollection.Add($"receiver[{keyValuePair.Key}]",keyValuePair.Value?.ToString());
                 }
             }
 
+          
             return nameValueCollection;
         }
 
